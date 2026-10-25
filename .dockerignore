@@ -1,0 +1,9 @@
+build/
+dist/
+.git/
+.vscode/
+*.o
+*.a
+*.exe
+.c-review-results/
+scratch/

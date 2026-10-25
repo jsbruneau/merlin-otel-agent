@@ -1,0 +1,75 @@
+# =============================================================================
+# merlin-otel-agent Configuration (RT-BE92U / Asuswrt-Merlin)
+# Place at /jffs/etc/motel.conf
+# =============================================================================
+
+# OTLP/HTTP target endpoint (Protobuf or JSON)
+# Examples:
+#   Standard OTel Collector: http://192.168.1.100:4318
+#   OpenObserve:             http://192.168.1.100:5080/api/default
+endpoint = http://192.168.1.100:4318
+
+# Optional custom headers (e.g., for OpenObserve or Grafana Cloud tenant auth)
+# Both OTel 'key=value' and HTTP 'key: value' formats are supported.
+# Base64 padding (=) in tokens is preserved.
+# Examples:
+#   OpenObserve Basic Auth: headers = Authorization=Basic <INSERT_BASE64_CREDENTIALS_HERE>
+#   Multi-tenant:           headers = X-Scope-OrgID=tenant,Authorization=Bearer <INSERT_API_TOKEN_HERE>
+# headers = Authorization=Basic <INSERT_BASE64_CREDENTIALS_HERE>
+
+# OpenTelemetry Resource Attributes
+service_name = merlin-router
+service_instance_id = rt-be92u-main
+host_name = router
+
+# Fast scrape interval in seconds (Host, NetDev, Flow Cache stats)
+scrape_interval_sec = 15
+
+# Slow scrape interval in seconds (Wi-Fi per-client stats, L3 flow tables)
+slow_interval_sec = 60
+
+# Syslog log file path
+syslog_file = /tmp/syslog.log
+
+# Read syslog from beginning on startup (0 = tail from current end, 1 = from start)
+syslog_from_beginning = 0
+
+# Syslog rate limiter (protects against Broadcom Wi-Fi deauth/logging storms)
+# Maximum sustained logs processed per second (0 = unlimited)
+syslog_rate_limit = 50.0
+
+# Maximum burst allowance of log lines
+syslog_burst_limit = 100.0
+
+# Telemetry subsystem toggles
+enable_host = 1
+enable_net = 1
+enable_flowcache = 1
+enable_archer = 1
+enable_wifi = 1
+enable_syslog = 1
+
+# In-process Netlink connection tracking & traffic accounting (conntrack DESTROY events)
+# Tracks client_ip + protocol + dest_port with high-port bucketing
+enable_conntrack_events = 1
+
+# Centralized LAN IP subnets (CIDR notation or single IP, comma-separated)
+# Used across Flow Cache and Netlink Conntrack collectors to identify local clients.
+# Customize this (e.g. 192.168.1.0/24) in double-NAT setups where WAN also uses RFC1918.
+lan_subnets = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, fc00::/7
+
+# Maximum top client flow IPs to track for offloaded bandwidth (bounds RAM)
+top_client_flows = 32
+
+# Maximum distinct (client_ip, protocol, dest_port) conntrack flow keys to retain
+# Additional keys aggregate into client_ip="other", dest_port="overflow"
+max_conntrack_flows = 512
+
+# HTTP request timeout in seconds
+timeout_sec = 5
+
+# Sender bounded ring buffer queue capacity (number of payloads)
+queue_capacity = 128
+
+# Verbose stderr logging
+verbose = 0

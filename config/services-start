@@ -1,0 +1,22 @@
+#!/bin/sh
+# Asuswrt-Merlin services-start hook for merlin-otel-agent
+# Install to: /jffs/scripts/services-start
+# Ensure permissions: chmod +x /jffs/scripts/services-start
+
+BIN="/jffs/bin/merlin-otel-agent"
+CONF="/jffs/etc/motel.conf"
+
+if [ -f "$BIN" ]; then
+    chmod +x "$BIN"
+    # Kill any existing instance
+    killall merlin-otel-agent 2>/dev/null
+    sleep 1
+
+    # Run in daemon mode
+    if [ -f "$CONF" ]; then
+        "$BIN" -d -c "$CONF"
+    else
+        "$BIN" -d
+    fi
+    logger -t motel "merlin-otel-agent service started"
+fi

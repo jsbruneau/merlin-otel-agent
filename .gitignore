@@ -1,0 +1,91 @@
+# =============================================================================
+# Build Artifacts & Output Directories
+# =============================================================================
+build/
+build-*/
+cmake-build-*/
+bin/
+lib/
+dist/
+out/
+
+# CMake Generated Files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+.ninja_deps
+.ninja_log
+*.ninja
+
+# Object & Binary Files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.elf
+*.pdb
+*.ilk
+*.exp
+
+# Test & Coverage Outputs
+Testing/
+*.log
+*.tmp
+*.gcov
+*.gcda
+*.gcno
+
+# Core Dumps
+core
+core.*
+vgcore.*
+
+# =============================================================================
+# IDEs & Editor Configuration
+# =============================================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+*.bak
+
+# =============================================================================
+# Operating System Junk
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# =============================================================================
+# Local Overrides & Secrets
+# =============================================================================
+*.env
+*.local
+motel.conf
+*.conf.local
+
+# =============================================================================
+# Local Analysis, Audit & Scratch Artifacts
+# =============================================================================
+.c-review-results/
+scratch/
+*.back/
+*.prev
+*.partial
+
